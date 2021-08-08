@@ -1,0 +1,38 @@
+{
+  "name": "shootemup",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "description": "A side scrolling space shooter game with pixijs.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-serve ./webpack.config.js",
+    "lint": "eslint . --ext .ts"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^3.9.0",
+    "@typescript-eslint/parser": "^3.9.0",
+    "css-loader": "^5",
+    "eslint": "^7.6.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-import-resolver-typescript": "^2.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-json": "^2.1.2",
+    "eslint-plugin-prettier": "^3.1.4",
+    "node-sass": "^4",
+    "prettier": "^2.0.5",
+    "pixi.js": "^6.1.0",
+    "sass-loader": "^7.3.1",
+    "source-map-loader": "^0.2.3",
+    "style-loader": "^2",
+    "ts-loader": "^4.0.0",
+    "typescript": "^2.9.2",
+    "webpack": "^4.0.1",
+    "webpack-cli": "^2.0.10",
+    "webpack-serve": "^0.1.5"
+  },
+  "dependencies": {}
+}
