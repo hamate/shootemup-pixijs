@@ -6,8 +6,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-serve ./webpack.config.js",
-    "lint": "eslint . --ext .ts"
+    "dev": "webpack-serve ./webpack.config.js",
+    "lint": "eslint . --ext .ts",
+    "build": "webpack -p",
+    "start": "node server.js",
+    "heroku-postbuild": "webpack -p"
   },
   "author": "",
   "license": "UNLICENSED",
@@ -31,8 +34,10 @@
     "ts-loader": "^4.0.0",
     "typescript": "^2.9.2",
     "webpack": "^4.0.1",
-    "webpack-cli": "^2.0.10",
+    "webpack-cli": "^3.1.10",
     "webpack-serve": "^0.1.5"
   },
-  "dependencies": {}
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
