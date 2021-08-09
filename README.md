@@ -13,3 +13,9 @@ In the cloned repository:
   and the automatic compilation
 
 - Open `localhost:8080` in your browser
+
+#### Gameplay
+
+You can move around with the arrow keys and shoot rockets with the spacebar.
+If you crash into an enemy the game is over.
+Survive as long as you can.

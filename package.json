@@ -6,10 +6,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-serve ./webpack.config.js",
+    "start": "webpack-serve ./webpack.config.js",
     "lint": "eslint . --ext .ts",
     "build": "webpack -p",
-    "start": "node server.js",
     "heroku-postbuild": "webpack -p"
   },
   "author": "",

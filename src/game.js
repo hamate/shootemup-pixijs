@@ -1,14 +1,14 @@
-import * as PIXI from "pixi.js";
-import endGame from "./endGame";
-import main from "./main";
-import mainTitle from "./mainTitle";
+import * as PIXI from 'pixi.js';
+import endGame from './endGame';
+import main from './main';
+import mainTitle from './mainTitle';
 
 export default function game() {
-  if (document.querySelector("canvas")) {
-    document.querySelector("canvas").remove();
+  if (document.querySelector('canvas')) {
+    document.querySelector('canvas').remove();
   }
-  if (document.querySelector("div")) {
-    document.querySelectorAll("div").forEach((div) => div.remove());
+  if (document.querySelector('div')) {
+    document.querySelectorAll('div').forEach((div) => div.remove());
   }
 
   let Application = PIXI.Application,
@@ -30,13 +30,13 @@ export default function game() {
   document.body.appendChild(gameApp.view);
 
   loader
-    .add("../img/sprites/spaceSprites.json")
-    .add("bgBack", "../img/nebula.png")
-    .add("bgRocks", "../img/Rocks.png")
-    .add("bgGround", "../img/Ground.png")
-    .add("bgGroundFront", "../img/GroundFront.png")
-    .add("rocket", "../img/sprites/shot.png")
-    .add("../img/Explosion1/explosion.json")
+    .add('../img/sprites/spaceSprites.json')
+    .add('bgBack', '../img/nebula.png')
+    .add('bgRocks', '../img/Rocks.png')
+    .add('bgGround', '../img/Ground.png')
+    .add('bgGroundFront', '../img/GroundFront.png')
+    .add('rocket', '../img/sprites/shot.png')
+    .add('../img/Explosion1/explosion.json')
     .load(setup);
 
   let ship,
@@ -56,20 +56,20 @@ export default function game() {
     bgGroundFront,
     bgX = 0,
     bgSpeed = 2,
-    deltaY;
+    deltaY = 0;
 
   function setup() {
     gameScene = new Container();
     gameApp.stage.addChild(gameScene);
 
-    bgBack = createBg(resources["bgBack"].texture);
-    bgRocks = createBg(resources["bgRocks"].texture);
-    bgGround = createBg(resources["bgGround"].texture);
-    bgGroundFront = createBg(resources["bgGroundFront"].texture);
+    bgBack = createBg(resources['bgBack'].texture);
+    bgRocks = createBg(resources['bgRocks'].texture);
+    bgGround = createBg(resources['bgGround'].texture);
+    bgGroundFront = createBg(resources['bgGroundFront'].texture);
 
-    sprites = resources["../img/sprites/spaceSprites.json"].textures;
+    sprites = resources['../img/sprites/spaceSprites.json'].textures;
 
-    ship = new Sprite(sprites["Ship5.png"]);
+    ship = new Sprite(sprites['Ship5.png']);
     ship.width = 100;
     ship.height = 60;
     ship.x = 55;
@@ -102,18 +102,19 @@ export default function game() {
   }
 
   function addEnemy(sprites) {
-    let enemySprites = ["Ship1.png", "Ship3.png", "Ship6.png"];
+    let enemySprites = ['Ship1.png', 'Ship3.png', 'Ship6.png'];
 
     const intId = setInterval(() => {
       let randomEnemy = enemySprites[Math.floor(Math.random() * 3)];
       enemy = new Sprite(sprites[randomEnemy]);
-      enemy.moveR = Math.random() * (2.5 - 1.2) + 1.2;
+      enemy.moveR = Math.random() * (2.0 - 1.1) + 1.1;
+      enemy.deltaY = Math.random() * (0.3 - 0.1) + 0.1;
       enemy.anchor.set(0.5);
       enemy.x = 800 + enemy.width / 2 + 5;
       enemy.y =
         Math.random() *
-          (600 - 5 - enemy.height / 2 - 150 - (150 + enemy.height / 2 + 5)) +
-        (150 + enemy.height / 2 + 5);
+          (600 - enemy.height / 2 - 175 - (170 + enemy.height / 2)) +
+        (170 + enemy.height / 2);
       enemy.id = id;
       enemy.changer = Math.random() < 0.5 ? -1 : 1;
       id++;
@@ -127,12 +128,13 @@ export default function game() {
   }
 
   function play(delta) {
-    deltaY += 0.02;
     enemies.forEach((enemy) => {
+      enemy.deltaY += 0.02;
       enemy.x -= 1.3;
-      // enemy.y += Math.sin(deltaY * enemy.changer) * enemy.moveR;
+      enemy.y += Math.sin(enemy.deltaY * enemy.changer) * enemy.moveR;
       if (rectsIntersect(ship, enemy)) {
         gameScene.removeChild(ship);
+        gameScene.removeChild(rocket);
         explodeObject(ship);
         state = end;
       }
@@ -163,14 +165,15 @@ export default function game() {
       endGame();
       PIXI.utils.clearTextureCache();
       setTimeout(() => {
+        ticker.stop()
         main(gameApp);
       }, 2000);
     }, 1500);
   }
 
   function explodeObject(obj) {
-    let sheet = resources["../img/Explosion1/explosion.json"].spritesheet;
-    explosion = new PIXI.AnimatedSprite(sheet.animations["Explosion1"]);
+    let sheet = resources['../img/Explosion1/explosion.json'].spritesheet;
+    explosion = new PIXI.AnimatedSprite(sheet.animations['Explosion1']);
     explosion.anchor.set(0.5);
     explosion.x = obj.x;
     explosion.y = obj.y;
@@ -198,11 +201,11 @@ export default function game() {
   let friction = 0.94;
   let keys = [];
 
-  document.body.addEventListener("keydown", function (e) {
+  document.body.addEventListener('keydown', (e) => {
     keys[e.keyCode] = true;
   });
 
-  document.body.addEventListener("keyup", function (e) {
+  document.body.addEventListener('keyup', (e) => {
     keys[e.keyCode] = false;
   });
 
@@ -253,15 +256,15 @@ export default function game() {
     let bBox = b.getBounds();
 
     return (
-      aBox.x + aBox.width > bBox.x + 10 &&
-      aBox.x < bBox.x + bBox.width - 10 &&
+      aBox.x + aBox.width > bBox.x + 15 &&
+      aBox.x < bBox.x + bBox.width - 15 &&
       aBox.y + aBox.height > bBox.y + 10 &&
       aBox.y < bBox.y + bBox.height - 10
     );
   }
 
   function shootRocket() {
-    let rocketTexture = TextureCache["../img/sprites/shot.png"];
+    let rocketTexture = TextureCache['../img/sprites/shot.png'];
     rocket = new Sprite(rocketTexture);
     rocket.x = ship.x + ship.width / 2 + rocket.width / 2;
     rocket.y = ship.y + 7;
@@ -271,9 +274,9 @@ export default function game() {
     gameScene.addChild(rocket);
   }
 
-  document.body.addEventListener("keydown", function (e) {
+  document.body.addEventListener('keydown', (e) => {
     if (e.keyCode === 32) {
-      shootRocket();
+     state != end && shootRocket();
     }
   });
 }
