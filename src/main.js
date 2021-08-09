@@ -1,56 +1,56 @@
-import * as PIXI from 'pixi.js';
-import game from './game';
-import mainTitle from './mainTitle';
+import * as PIXI from "pixi.js";
+import game from "./game";
+import mainTitle from "./mainTitle";
 
 export default function main(gameApp) {
-  if (document.querySelector('canvas') && !gameApp) {
-    document.querySelector('canvas').remove();
+  if (document.querySelector("canvas") && !gameApp) {
+    document.querySelector("canvas").remove();
   }
-  if (document.querySelector('.end-title')) {
-    document.querySelector('.end-title').remove();
+  if (document.querySelector(".end-title")) {
+    document.querySelector(".end-title").remove();
   }
-  if (document.querySelector('.control-panel')) return;
-  console.log(gameApp)
-  gameApp && gameApp.destroy(true)
+  if (document.querySelector(".control-panel")) return;
+
+  gameApp && gameApp.destroy(true);
   mainTitle();
 
-  const panel = document.createElement('div');
-  panel.className = 'control-panel';
+  const panel = document.createElement("div");
+  panel.className = "control-panel";
   for (let i = 0; i < 4; i++) {
-    let button = document.createElement('button');
-    let span = document.createElement('span');
+    let button = document.createElement("button");
+    let span = document.createElement("span");
     span.innerHTML = `GAME${i + 1}`;
-    span.className = 'cybr-btn__glitch';
+    span.className = "cybr-btn__glitch";
     if (i < 3) {
-      button.className = 'cybr-btn start-game-btn';
+      button.className = "cybr-btn start-game-btn";
       button.innerHTML = `GAME${i + 1}`;
     } else {
-      button.className = 'cybr-btn end-game-btn';
+      button.className = "cybr-btn end-game-btn";
       button.innerHTML = `EXIT`;
     }
     button.appendChild(span);
     panel.appendChild(button);
   }
   document.body.appendChild(panel);
-  panel.style.position = 'absolute';
-  document.querySelector('.end-game-btn').addEventListener('click', () => {
-    window.location.href = 'http://nasa.gov';
+  panel.style.position = "absolute";
+  document.querySelector(".end-game-btn").addEventListener("click", () => {
+    window.location.href = "http://nasa.gov";
   });
 
-  document.querySelectorAll('.start-game-btn').forEach((button) =>
-    button.addEventListener('click', () => {
+  document.querySelectorAll(".start-game-btn").forEach((button) =>
+    button.addEventListener("click", () => {
       game();
     })
   );
 
   const app = new PIXI.Application();
   document.body.appendChild(app.view);
-  const loader = new PIXI.Loader()
-  loader.add('../img/star.png').load()
+  const loader = new PIXI.Loader();
+
   let mainScene = new PIXI.Container();
   app.stage.addChild(mainScene);
-  const starTexture = PIXI.Texture.from('../img/star.png');
-    console.log(app);
+  const starTexture = PIXI.Texture.from("../img/star.png");
+
   const starAmount = 1000;
   let cameraZ = 0;
   const fov = 20;

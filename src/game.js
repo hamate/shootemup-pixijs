@@ -1,14 +1,14 @@
-import * as PIXI from 'pixi.js';
-import endGame from './endGame';
-import main from './main';
-import mainTitle from './mainTitle';
+import * as PIXI from "pixi.js";
+import endGame from "./endGame";
+import main from "./main";
+import mainTitle from "./mainTitle";
 
 export default function game() {
-  if (document.querySelector('canvas')) {
-    document.querySelector('canvas').remove();
+  if (document.querySelector("canvas")) {
+    document.querySelector("canvas").remove();
   }
-  if (document.querySelector('div')) {
-    document.querySelectorAll('div').forEach((div) => div.remove());
+  if (document.querySelector("div")) {
+    document.querySelectorAll("div").forEach((div) => div.remove());
   }
 
   let Application = PIXI.Application,
@@ -30,13 +30,13 @@ export default function game() {
   document.body.appendChild(gameApp.view);
 
   loader
-    .add('../img/sprites/spaceSprites.json')
-    .add('bgBack', '../img/nebula.png')
-    .add('bgRocks', '../img/Rocks.png')
-    .add('bgGround', '../img/Ground.png')
-    .add('bgGroundFront', '../img/GroundFront.png')
-    .add('rocket', '../img/sprites/shot.png')
-    .add('../img/Explosion1/explosion.json')
+    .add("../img/sprites/spaceSprites.json")
+    .add("bgBack", "../img/nebula.png")
+    .add("bgRocks", "../img/Rocks.png")
+    .add("bgGround", "../img/Ground.png")
+    .add("bgGroundFront", "../img/GroundFront.png")
+    .add("rocket", "../img/sprites/shot.png")
+    .add("../img/Explosion1/explosion.json")
     .load(setup);
 
   let ship,
@@ -62,14 +62,14 @@ export default function game() {
     gameScene = new Container();
     gameApp.stage.addChild(gameScene);
 
-    bgBack = createBg(resources['bgBack'].texture);
-    bgRocks = createBg(resources['bgRocks'].texture);
-    bgGround = createBg(resources['bgGround'].texture);
-    bgGroundFront = createBg(resources['bgGroundFront'].texture);
+    bgBack = createBg(resources["bgBack"].texture);
+    bgRocks = createBg(resources["bgRocks"].texture);
+    bgGround = createBg(resources["bgGround"].texture);
+    bgGroundFront = createBg(resources["bgGroundFront"].texture);
 
-    sprites = resources['../img/sprites/spaceSprites.json'].textures;
+    sprites = resources["../img/sprites/spaceSprites.json"].textures;
 
-    ship = new Sprite(sprites['Ship5.png']);
+    ship = new Sprite(sprites["Ship5.png"]);
     ship.width = 100;
     ship.height = 60;
     ship.x = 55;
@@ -102,7 +102,7 @@ export default function game() {
   }
 
   function addEnemy(sprites) {
-    let enemySprites = ['Ship1.png', 'Ship3.png', 'Ship6.png'];
+    let enemySprites = ["Ship1.png", "Ship3.png", "Ship6.png"];
 
     const intId = setInterval(() => {
       let randomEnemy = enemySprites[Math.floor(Math.random() * 3)];
@@ -160,25 +160,7 @@ export default function game() {
 
   function end() {
     setTimeout(() => {
-      // gameApp.destroy(true)
       endGame();
-      
-      // ticker.stop(gameLoop);
-      // gameScene.destroy({
-      //   children: true,
-      //   texture: true,
-      //   baseTexture: true,
-      // });
-      // gameApp.stage.destroy(true);
-      // gameApp.stage = null;
-      // gameApp = null;
-      // app.renderer.reset();
-      // app.stage.removeChildren();
-      // Object.keys(PIXI.utils.TextureCache).forEach(function (texture) {
-      //   PIXI.utils.TextureCache[texture].destroy(true);
-      // });
-      // loader.reset();
-      // app.stage.removeChild(gameScene);
       PIXI.utils.clearTextureCache();
       setTimeout(() => {
         main(gameApp);
@@ -187,8 +169,8 @@ export default function game() {
   }
 
   function explodeObject(obj) {
-    let sheet = resources['../img/Explosion1/explosion.json'].spritesheet;
-    explosion = new PIXI.AnimatedSprite(sheet.animations['Explosion1']);
+    let sheet = resources["../img/Explosion1/explosion.json"].spritesheet;
+    explosion = new PIXI.AnimatedSprite(sheet.animations["Explosion1"]);
     explosion.anchor.set(0.5);
     explosion.x = obj.x;
     explosion.y = obj.y;
@@ -216,11 +198,11 @@ export default function game() {
   let friction = 0.94;
   let keys = [];
 
-  document.body.addEventListener('keydown', function (e) {
+  document.body.addEventListener("keydown", function (e) {
     keys[e.keyCode] = true;
   });
 
-  document.body.addEventListener('keyup', function (e) {
+  document.body.addEventListener("keyup", function (e) {
     keys[e.keyCode] = false;
   });
 
@@ -279,7 +261,7 @@ export default function game() {
   }
 
   function shootRocket() {
-    let rocketTexture = TextureCache['../img/sprites/shot.png'];
+    let rocketTexture = TextureCache["../img/sprites/shot.png"];
     rocket = new Sprite(rocketTexture);
     rocket.x = ship.x + ship.width / 2 + rocket.width / 2;
     rocket.y = ship.y + 7;
@@ -289,7 +271,7 @@ export default function game() {
     gameScene.addChild(rocket);
   }
 
-  document.body.addEventListener('keydown', function (e) {
+  document.body.addEventListener("keydown", function (e) {
     if (e.keyCode === 32) {
       shootRocket();
     }

@@ -1,12 +1,12 @@
-import * as PIXI from 'pixi.js';
+import * as PIXI from "pixi.js";
 
-import intro from './intro';
-import main from './main';
-import game from './game';
-import './styles/intro.scss';
-import './styles/main.scss';
-import './styles/space.scss';
-import mainTitle from './mainTitle';
+import intro from "./intro";
+import main from "./main";
+import game from "./game";
+import "./styles/intro.scss";
+import "./styles/main.scss";
+import "./styles/space.scss";
+import mainTitle from "./mainTitle";
 
 let introScene = new PIXI.Container();
 

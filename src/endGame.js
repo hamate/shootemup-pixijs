@@ -1,5 +1,5 @@
 export default function end() {
-  if(document.querySelector('.end-title')) return
+  if (document.querySelector(".end-title")) return;
   const endTitle = document.createElement("div");
   const glitch = document.createElement("div");
   const glow = document.createElement("div");
