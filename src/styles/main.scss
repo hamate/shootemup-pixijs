@@ -1,14 +1,13 @@
 .control-panel {
   position: absolute;
-  top: 250px;
+  top: 0;
   left: 0;
   right: 0;
-  margin-left: auto;
-  margin-right: auto;
   display: flex;
   flex-direction: column;
   z-index: 3;
-  width: 250px;
+  width: 800px;
+  height: 600px;
 }
 
 @font-face {
@@ -26,6 +25,8 @@ body .cybr-btn + .cybr-btn {
 }
 
 .cybr-btn {
+  width: 250px;
+  margin: 280px auto 0 auto;
   --primary: hsl(
     var(--primary-hue),
     85%,

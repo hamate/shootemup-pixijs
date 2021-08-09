@@ -1,7 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Play:wght@700&display=swap");
 
-body {
-}
 
 .main-title {
   font-family: "Play", sans-serif;
@@ -26,7 +24,7 @@ body {
   top: 250px;
   left: 400px;
   background: black;
-  width: 550px;
+  width: 570px;
   box-shadow: 0px 0px 10px 10px rgb(11, 10, 10);
   overflow: hidden;
   .glitch {
@@ -120,7 +118,7 @@ body {
 
 .glow {
   @extend .glitch;
-  text-shadow: 0 0 1000px rgb(223, 191, 191);
+  text-shadow: 0 0 100px rgb(223, 191, 191);
   color: transparent;
   position: absolute;
   top: 0;
