@@ -146,6 +146,7 @@ export default function game() {
         if (rectsIntersect(rocket, en)) {
           gameScene.removeChild(rocket);
           gameScene.removeChild(en);
+          ticker.remove(gameLoop)
           explodeObject(en);
           enemies.splice(i, 1);
           rockets = rockets.filter((rckt) => rckt != rocket);
@@ -165,7 +166,6 @@ export default function game() {
       endGame();
       PIXI.utils.clearTextureCache();
       setTimeout(() => {
-        ticker.stop()
         main(gameApp);
       }, 2000);
     }, 1500);
